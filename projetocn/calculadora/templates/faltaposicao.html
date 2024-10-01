@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método da Bisseção</title>
+</head>
+<body>
+    <h1>Método da Bisseção</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="a">Valor de a:</label>
+        <input type="number" name="a" required>
+        
+        <label for="b">Valor de b:</label>
+        <input type="number" name="b" required>
+        
+        <label for="tolerancia">Tolerância:</label>
+        <input type="number" name="tolerancia" required>
+        
+        <button type="submit">Calcular</button>
+    </form>
+    {% if resultado %}
+    <div>
+        <h2>Resultado:</h2>
+        <p>Raiz: {{ resultado }}</p>
+    </div>
+    {% endif %}
+</body>
+</html>

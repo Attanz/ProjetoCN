@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora de Raízes</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMd5VwB8D4cV8cYk3uG6S4NhjK8J3w5/WY1mB" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/crispy-forms/1.9.0/css/crispy-forms.min.css" integrity="sha384-k6RqeWeci5ZR/Lv4MR0sA0FfDOMd5VwB8D4cV8cYk3uG6S4NhjK8J3w5/WY1mB" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-size: 45px; /* Aumentado em 50% de 30px */
+        }
+
+        .button-container {
+            display: flex;
+            flex-direction: column; /* Organiza os botões em coluna */
+            align-items: center; /* Centraliza os botões horizontalmente */
+        }
+
+        .button-row {
+            display: flex; /* Organiza os botões em linha */
+            justify-content: center; /* Centraliza os botões horizontalmente */
+            margin: 10px; /* Margem entre as linhas */
+        }
+
+        .button {
+            display: inline-block;
+            width: 300px; /* Aumentado em 50% */
+            height: 90px; /* Aumentado em 50% */
+            margin: 10px; /* Margem entre os botões */
+            text-align: center;
+            text-decoration: none;
+            color: white;
+            background-color: #007BFF; /* Cor de fundo do botão */
+            border-radius: 5px; /* Cantos arredondados */
+            font-size: 27px; /* Aumentado em 50% */
+            line-height: 90px; /* Centraliza verticalmente o texto */
+            transition: background-color 0.3s, transform 0.3s, box-shadow 0.3s; /* Efeito de transição */
+        }
+
+        .button:hover {
+            background-color: #0056b3; /* Cor de fundo ao passar o mouse */
+            transform: scale(1.05); /* Aumenta o botão */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Adiciona sombra ao passar o mouse */
+        }
+
+        /* Estilos responsivos */
+        @media (max-width: 600px) {
+            .button {
+                width: 225px; /* Ajustado para telas menores */
+                height: 75px; /* Ajustado para telas menores */
+                line-height: 75px; /* Centraliza verticalmente o texto em telas menores */
+                font-size: 24px; /* Ajustado para telas menores */
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>Escolha o Método para Estimar Raízes:</h1>
+    <div class="button-container">
+        <div class="button-row">
+            <a class="button" href="{% url 'bisseccao' %}">Bissecção</a>
+            <a class="button" href="{% url 'newton' %}">Newton-Raphson</a>
+        </div>
+        <div class="button-row">
+            <a class="button" href="{% url 'secante' %}">Secante</a>
+            <a class="button" href="{% url 'falsaposicao' %}">Falsa Posição</a>
+        </div>
+    </div>
+
+    <!-- Renderização do formulário usando Crispy -->
+    <div class="form-container">
+        <form method="post" novalidate>
+            {% csrf_token %}
+            {% load crispy_forms_tags %}
+            {{ form|crispy }}
+            <!-- Botão de enviar removido -->
+        </form>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/crispy-forms/1.9.0/js/crispy-forms.min.js"></script>
+</body>
+</html>

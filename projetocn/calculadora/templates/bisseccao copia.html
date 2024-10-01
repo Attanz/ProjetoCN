@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Método da Bissecção</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #eaf1f3, #ffffff);
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+        form {
+            margin-bottom: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: #ffffff;
+            overflow-x: auto; /* Permite rolagem horizontal se necessário */
+            box-shadow: 0 2px 14px rgba(0, 0, 0, 0.1); /* Sombra da tabela */
+            border-radius: 8px; /* Borda arredondada */
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border: 2px solid #007bff;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .result {
+            padding: 10px;
+            background-color: #dff0d8; /* Fundo verde claro */
+            border-left: 5px solid #4cae4c; /* Borda verde escura */
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Método da Bissecção</h1>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}  <!-- Renderiza o formulário como parágrafos -->
+            <button type="submit">Resolver</button>
+        </form>
+
+        {% if imagem %}
+            <h2>Gráfico da Função</h2>
+            <img src="data:image/png;base64,{{ imagem }}" alt="Gráfico">
+        {% endif %}
+
+        {% if raiz %}
+            <h2>Resultado</h2>
+            <div class="result">
+                Raiz Obtida: <strong>{{ raiz }}</strong>
+            </div>
+            <h3>Interações:</h3>
+            <table>
+                <tr>
+                    <th>Iteração</th>
+                    <th>A</th>
+                    <th>B</th>
+                    <th>C</th>
+                    <th>f(C)</th>
+                </tr>
+                {% for a, b, c, f_c in interacoes %}
+                <tr>
+                    <td>{{ forloop.counter }}</td>
+                    <td>{{ a }}</td>
+                    <td>{{ b }}</td>
+                    <td>{{ c }}</td>
+                    <td>{{ f_c }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        {% endif %}
+    </div>
+</body>
+</html>
